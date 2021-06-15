@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, make_response
-from os import environ as env
+import os
 
 app = Flask(__name__)
 
@@ -9,7 +9,7 @@ def hello_world():
 
 @app.route('/health')
 def health():
-  status = jsonify(status='OK',api_version=env['API_VERSION'])
+  status = jsonify(status='OK',api_version=os.getenv('API_VERSION', "None"))
   return make_response(status, 200)
 
 @app.route('/hello')
